@@ -3,6 +3,7 @@ package org.example;
 import org.example.GUI.Board;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.concurrent.CyclicBarrier;
 
 public class Main {
@@ -22,8 +23,9 @@ public class Main {
             int excess = Board.COLUMNS % THREADS;
             int columnsPerThread = Board.COLUMNS / THREADS;
             int startingColumn = 0;
+            Color[] colors = { Color.BLACK, Color.BLUE, Color.ORANGE, Color.MAGENTA, Color.RED, Color.CYAN, Color.PINK, Color.YELLOW };
 
-            for (int threadID = 0; threadID < THREADS; threadID++)   { //tu była zmiana
+            for (int threadID = 0; threadID < THREADS; threadID++)   {
 
                 int endingColumn = startingColumn + columnsPerThread - 1;
 
@@ -32,7 +34,7 @@ public class Main {
                     excess -= 1;
                 }
 
-                Thread thread = new Thread(new GameOfLifeWorker(startingColumn, endingColumn, startBarrier, endBarrier, threadID, board));
+                Thread thread = new Thread(new GameOfLifeWorker(startingColumn, endingColumn, startBarrier, endBarrier, threadID, colors[threadID], board));
                 thread.start();
 
                 startingColumn = endingColumn + 1;

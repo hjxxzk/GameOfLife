@@ -29,37 +29,29 @@ public class Board extends JFrame {
                 JButton button = new JButton();
                 button.setBackground(Color.WHITE);
                 button.addActionListener(new CellClickListener(i,j, button, board));
-                button.setEnabled(false);
+                button.setEnabled(false);       //click! option
                 mainPanel.add(button);
             }
         }
 
         add(mainPanel);
 
-        for (int i = 0; i < size; i++)  {
+        for (int i = 0; i < size; i++)  {       //sett coordinates
+            Container container = getContentPane();
             board[coordinates[i][0]][coordinates[i][1]] = true;
-        }
-        updateUI();
-
-    }
-
-
-    public void updateUI() { //String color
-     //   System.out.println("updated");
-        Container container = getContentPane();
-        for(int i = 0; i < ROWS; i++)   {
-            for(int j = 0; j < COLUMNS; j++)    {
-                JButton button = (JButton) ((JPanel) container.getComponent(0)).getComponent(i * COLUMNS + j);
-                button.setBackground(board[i][j] ? Color.BLACK : Color.WHITE);
-            }
+            JButton button = (JButton) ((JPanel) container.getComponent(0)).getComponent(coordinates[i][0] * COLUMNS + coordinates[i][1]);
+            button.setBackground(Color.BLACK);
         }
     }
 
-    public synchronized void nextBoard(boolean[][] newBoard, int startColumn, int endColumn)    {
+    public synchronized void nextBoard(boolean[][] newBoard, int startColumn, int endColumn, Color color)    {   //kolory
 
         for (int column = startColumn; column <= endColumn; column++)  {
             for(int row = 0; row <= Board.ROWS - 1; row++) {
+                    Container container = getContentPane();
                     board[row][column] = newBoard[row][column];
+                    JButton button = (JButton) ((JPanel) container.getComponent(0)).getComponent(row * COLUMNS + column);
+                    button.setBackground(board[row][column] ? color : Color.WHITE);
             }
         }
     }

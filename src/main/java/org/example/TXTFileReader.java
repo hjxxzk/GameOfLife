@@ -20,33 +20,31 @@ public class TXTFileReader {
                 int iterations = scanner.nextInt();
                 int size = scanner.nextInt();
 
-                if (row < threads || col < threads) {
-                    throw new IllegalArgumentException("Incorrect input");
+                if (col < threads) {       // 1st error
+                    throwError();
                 }
 
-                int[][] coordinates = new int[size][2];
-
+                int[][] coordinates = new int[size][2];         // x y
+                                                                // x y...
             for (int i = 0; i < size; i++) {
                 coordinates[i][0] = scanner.nextInt();
                 coordinates[i][1] = scanner.nextInt();
 
-                if (coordinates[i][0] >= row) {
-                    throw new IllegalArgumentException("Incorrect input");
+                if (coordinates[i][0] >= row || coordinates[i][1] >= col) {     // 2nd error
+                    throwError();
                 }
-
-                if (coordinates[i][1] >= col) {
-                    throw new IllegalArgumentException("Incorrect input");
-                }
-
             }
 
             return new Board(row, col, size, coordinates, iterations);
-
 
         } catch (FileNotFoundException | InputMismatchException e)    {
             System.out.println("Incorrect input");
         }
 
         return null;
+    }
+
+    public static void throwError() {
+        throw new IllegalArgumentException("Incorrect input");
     }
 }
