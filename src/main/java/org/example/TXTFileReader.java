@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class TXTFileReader {
 
-    public static Board raedFile(String filePath, int threads)   {
+    public static Board raedFile(String filePath, ValidateFile validation)   {
 
         try {
             File file = new File(filePath);
@@ -20,17 +20,17 @@ public class TXTFileReader {
                 int iterations = scanner.nextInt();
                 int size = scanner.nextInt();
 
-                if (col < threads) {       // 1st error
+                if (validation.validate(col))   {
                     throwError();
                 }
 
-                int[][] coordinates = new int[size][2];         // x y
-                                                                // x y...
+                int[][] coordinates = new int[size][2];
+
             for (int i = 0; i < size; i++) {
                 coordinates[i][0] = scanner.nextInt();
                 coordinates[i][1] = scanner.nextInt();
 
-                if (coordinates[i][0] >= row || coordinates[i][1] >= col) {     // 2nd error
+                if (coordinates[i][0] >= row || coordinates[i][1] >= col) {
                     throwError();
                 }
             }

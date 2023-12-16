@@ -92,7 +92,7 @@ public class GameOfLifeWorker implements Runnable {
                 for (int j = column - 1; j <= column + 1; j++) {
 
                     if (i < 0)  {
-                        numberOfCells += checkAdditionalRow(column, Board.ROWS - 1);    //sprawdzone
+                        numberOfCells += checkAdditionalRow(column, Board.ROWS - 1);
                         j += 3; //skip 3 iterations
 
                     }   else if (i == Board.ROWS)  {

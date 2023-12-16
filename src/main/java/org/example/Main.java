@@ -12,9 +12,10 @@ public class Main {
         int THREADS = Integer.parseInt(args[1]);
         CyclicBarrier startBarrier = new CyclicBarrier(THREADS);
         CyclicBarrier endBarrier = new CyclicBarrier(THREADS);
+        ValidateFile validation = new ValidateFile(THREADS);
 
         SwingUtilities.invokeLater(() -> {
-            Board board = TXTFileReader.raedFile(args[0], THREADS);
+            Board board = TXTFileReader.raedFile(args[0], validation);
             assert board != null;
             board.setVisible(true);
 

@@ -1,6 +1,5 @@
 package org.example.GUI;
 
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,7 +43,7 @@ public class Board extends JFrame {
         }
     }
 
-    public synchronized void nextBoard(boolean[][] newBoard, int startColumn, int endColumn, Color color)    {   //kolory
+    public synchronized void nextBoard(boolean[][] newBoard, int startColumn, int endColumn, Color color)    {
 
         for (int column = startColumn; column <= endColumn; column++)  {
             for(int row = 0; row <= Board.ROWS - 1; row++) {
